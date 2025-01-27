@@ -16,7 +16,7 @@ public class HookTest {
     @AfterTest
     public void teardown() throws InterruptedException {
         System.out.println("teardown");
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         DriverSingleton.quitDriver();
     }
 }
