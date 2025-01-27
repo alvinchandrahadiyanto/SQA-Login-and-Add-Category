@@ -13,10 +13,11 @@ import java.time.Duration;
 public class CategoryPage {
     private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id='content']/h1='Select category to change']")
+    //@FindBy(xpath = "//*[@id=\"content\"]/h1='Select category to change']")
+    @FindBy(xpath = "//h1[normalize-space()='Add category']")
     private WebElement categoryElement;
 
-    @FindBy(xpath = "//*[@id='content-main']/ul/li/a")
+    @FindBy(xpath = "//*[@id=\"content-main\"]/ul/li/a")
     private WebElement addCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"id_name\"]")
@@ -25,11 +26,14 @@ public class CategoryPage {
     @FindBy(xpath = "//*[@id=\"category_form\"]/div/div/input[1]")
     WebElement buttonSaveCategoryElement;
 
-    @FindBy(xpath = "//*[@id='searchbar']")
+    @FindBy(xpath = "//*[@id=\"searchbar\"]")
     private WebElement searchBar;
 
-    @FindBy(xpath = "//*[@id='changelist-search']/div/input[2]")
+    @FindBy(xpath = "//*[@id=\"changelist-search\"]/div/input[2]")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//*[@id=\"content-start\"]/ul/li")
+    private WebElement addCategorySuccess;
 
     private WebDriverWait wait;
 
@@ -41,13 +45,8 @@ public class CategoryPage {
     }
 
     public void waitForCategoryElement() {
-        By locator = By.xpath("//*[@id='content']/h1='Select category to change']");
+        By locator = By.xpath("//h1[normalize-space()='Add category']");
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    }
-
-    public String getTextCategoryElement() {
-        waitForCategoryElement();
-        return categoryElement.getText();
     }
 
     public void clickAddCategory(){
@@ -65,5 +64,9 @@ public class CategoryPage {
     public void addCategoryActivity(String nameCategory) {
         fillCategory(nameCategory);
         clickSaveCategory();
+    }
+
+    public String getSuccessMessageAddCategory() {
+        return addCategorySuccess.getText();
     }
 }

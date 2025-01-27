@@ -41,6 +41,4 @@ public class DashboardPage {
     public void logout(){
         logoutButton.click();
     }
-
-    //Pesan menambah kategori sukses: *[@id="content-start"]/ul/li
 }

@@ -5,6 +5,7 @@
     <test name="eCommerce Test Admin Dashboard">
         <classes>
             <class name="com.ujianMingguKe3.authentication.SignInTestAdmin"></class>
+            <class name="com.ujianMingguKe3.products.AddCategoryTest"></class>
             <class name="com.ujianMingguKe3.HookTest"></class>
         </classes>
     </test>
