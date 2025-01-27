@@ -1,0 +1,50 @@
+package com.ujianMingguKe3.authentication;
+
+import com.ujianMingguKe3.drivers.DriverSingleton;
+import com.ujianMingguKe3.drivers.utils.BrowserType;
+import com.ujianMingguKe3.pages.authentications.DashboardPage;
+import com.ujianMingguKe3.pages.authentications.SignInPage;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SignInTestAdmin {
+    private SignInPage signInPage;
+    private DashboardPage dashboardPage;
+    private WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        System.out.println("Sign In Test Admin");
+        driver = DriverSingleton.getDriver(BrowserType.CHROME);
+    }
+
+    @Test(priority = 1)
+    public void signInNegativeTest() {
+        System.out.println("Negative Test Login");
+        driver.get("http://127.0.0.1:8000/admin");
+        signInPage = new SignInPage(driver);
+        signInPage.loginActivity("admin", "1234");
+
+        String expected = "Please enter the correct username and password for a staff account. Note that both fields may be case-sensitive.";
+        String actual = signInPage.getErrorMessage();
+
+        Assert.assertEquals(actual.toLowerCase(), expected.toLowerCase());
+    }
+
+    @Test(priority = 2)
+    public void signInPositiveTest() {
+        System.out.println("Positive Test Login");
+        driver.get("http://127.0.0.1:8000/admin");
+        signInPage = new SignInPage(driver);
+        signInPage.loginActivity("admin", "admin");
+
+        dashboardPage = new DashboardPage(driver);
+
+        String expected = "Welcome to Demo SQA Testing Portal";
+        String actual = dashboardPage.getTextWelocmeHeadingElement();
+
+        Assert.assertEquals(actual.toLowerCase(), expected.toLowerCase());
+    }
+}
