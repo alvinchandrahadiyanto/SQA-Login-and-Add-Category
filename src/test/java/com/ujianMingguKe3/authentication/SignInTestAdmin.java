@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import com.ujianMingguKe3.HookTest;
 
 public class SignInTestAdmin {
     private SignInPage signInPage;
@@ -23,14 +24,18 @@ public class SignInTestAdmin {
     @Test(priority = 1)
     public void signInNegativeTest() {
         System.out.println("Negative Test Login");
+        HookTest.delay(5);
         driver.get("http://127.0.0.1:8000/admin");
         signInPage = new SignInPage(driver);
         signInPage.loginActivity("admin", "1234");
+        HookTest.delay(3);
 
         String expected = "Please enter the correct username and password for a staff account. Note that both fields may be case-sensitive.";
         String actual = signInPage.getErrorMessage();
 
         Assert.assertEquals(actual.toLowerCase(), expected.toLowerCase());
+
+        HookTest.delay(5);
     }
 
     @Test(priority = 2)
@@ -40,11 +45,14 @@ public class SignInTestAdmin {
         signInPage = new SignInPage(driver);
         signInPage.loginActivity("admin", "admin");
 
+        HookTest.delay(3);
+
         dashboardPage = new DashboardPage(driver);
 
         String expected = "Welcome to Demo SQA Testing Portal";
         String actual = dashboardPage.getTextWelocmeHeadingElement();
 
         Assert.assertEquals(actual.toLowerCase(), expected.toLowerCase());
+        HookTest.delay(5);
     }
 }

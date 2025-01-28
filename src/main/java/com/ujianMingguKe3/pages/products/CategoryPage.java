@@ -14,10 +14,13 @@ public class CategoryPage {
     private WebDriver driver;
 
     //@FindBy(xpath = "//*[@id=\"content\"]/h1='Select category to change']")
-    @FindBy(xpath = "//h1[normalize-space()='Add category']")
+    @FindBy(xpath = "//h1[normalize-space()='Select category to change']")
     private WebElement categoryElement;
 
-    @FindBy(xpath = "//*[@id=\"content-main\"]/ul/li/a")
+    @FindBy(xpath = "//a[normalize-space()='Categorys']")
+    private WebElement goToCategory;
+
+    @FindBy(xpath = "//a[normalize-space()='Add category']")
     private WebElement addCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"id_name\"]")
@@ -45,8 +48,12 @@ public class CategoryPage {
     }
 
     public void waitForCategoryElement() {
-        By locator = By.xpath("//h1[normalize-space()='Add category']");
+        By locator = By.xpath("//h1[normalize-space()='Select category to change']");
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public void clickGoToCategory(){
+        goToCategory.click();
     }
 
     public void clickAddCategory(){
@@ -62,6 +69,7 @@ public class CategoryPage {
     }
 
     public void addCategoryActivity(String nameCategory) {
+        clickAddCategory();
         fillCategory(nameCategory);
         clickSaveCategory();
     }

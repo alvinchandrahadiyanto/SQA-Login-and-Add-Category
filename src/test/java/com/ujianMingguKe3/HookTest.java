@@ -14,7 +14,7 @@ public class HookTest {
     }
 
     @AfterTest
-    public void teardown() throws InterruptedException {
+    public void teardown() {
         System.out.println("teardown");
         delay(10);
         DriverSingleton.quitDriver();

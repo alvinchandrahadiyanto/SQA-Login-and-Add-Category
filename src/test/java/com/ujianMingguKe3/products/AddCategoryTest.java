@@ -21,8 +21,9 @@ public class AddCategoryTest {
     @Test(dependsOnMethods= {"signInPositiveTest"})
     public void addCategoryPositiveTest() {
         System.out.println("Positive Test Add Category");
-        driver.get("http://127.0.0.1:8000/admin/products/category/add/");
+        //driver.get("http://127.0.0.1:8000/admin/products/category/add/");
         categoryPage = new CategoryPage(driver);
+        categoryPage.clickGoToCategory();
         categoryPage.waitForCategoryElement();
         categoryPage.addCategoryActivity("Makanan");
 
